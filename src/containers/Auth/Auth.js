@@ -2,7 +2,10 @@ import React, {useEffect, useState} from 'react';
 import classes from './Auth.module.scss'
 import Button from "../../components/UI/Button/Button";
 import Input from "../../components/UI/Input/Input";
-import axios from "axios";
+
+import {connect} from "react-redux";
+import {auth} from "../../store/actions/auth";
+import Notification from "../../components/UI/Notification/Notification";
 
 
 function validateEmail (email) {
@@ -13,7 +16,7 @@ function validateEmail (email) {
         );
 };
 
-const Auth = () => {
+const Auth = (props) => {
 
     const[formValid, setFormValid] = new useState({
     isFormValid:false,
@@ -48,39 +51,23 @@ const Auth = () => {
 
 
 
-    async function loginHandler(){
-
+    function loginHandler(){
         const authData = {
             email: formValid.formControls.email.value,
             password: formValid.formControls.password.value,
             returnSecureToken:true
         }
-        try {
-            const response = await axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAvRrASOxzPm1wqCiVmhcUNZrhQyy9ecHY', authData)
+        props.auth(authData.email, authData.password, true)
 
-            console.log(response.data)
-        }catch (error){
-            console.log(error)
-        }
-
-        console.log('Press login')
     }
-    async function registerHandler(){
+    function registerHandler(){
         const authData = {
             email: formValid.formControls.email.value,
             password: formValid.formControls.password.value,
             returnSecureToken:true
         }
 
-        try {
-            const response = await axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAvRrASOxzPm1wqCiVmhcUNZrhQyy9ecHY', authData)
-
-            console.log(response.data)
-        }catch (error){
-            console.log(error)
-        }
-
-
+        props.auth(authData.email, authData.password, false)
     }
     function submitHandler(event){
         event.preventDefault()
@@ -101,7 +88,7 @@ const Auth = () => {
 
 
 
-        console.log('isFormValid ', isFormValid)
+        // console.log('isFormValid ', isFormValid)
 
 
         Object.keys(formValidFromHandler).forEach(name => {
@@ -117,7 +104,9 @@ const Auth = () => {
 
     }
     useEffect(()=>{
-        console.log(formValid)
+        console.log(props.isError)
+
+        // console.log(formValid)
     },[formValid])
 
     function validateControl(value, validation){
@@ -171,6 +160,11 @@ const Auth = () => {
                 <h1>Авторизация</h1>
 
                 <form onSubmit={submitHandler} className={classes.AuthForm}>
+                    {props.isError &&
+                        <Notification
+                        text={props.errorText}
+                        />
+                    }
 
                     {renderInputs()}
 
@@ -191,4 +185,17 @@ const Auth = () => {
 
 };
 
-export default Auth;
+function mapStateToProps(state){
+    return{
+        isError: state.auth.isError,
+        errorText: state.auth.errorText
+    }
+}
+
+function mapDispatchToProps(dispatch){
+    return{
+        auth: (email, password, isLogin) => dispatch(auth(email,password,isLogin))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);

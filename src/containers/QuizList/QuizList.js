@@ -3,55 +3,21 @@ import classes from './QuizList.module.scss'
 import {Link, NavLink} from "react-router-dom";
 
 import Loader from "../../components/UI/Loader/Loader";
-import axios from "../../axios/axios-quiz";
+import {fetchQuizes} from "../../store/actions/quiz";
 
-const QuizList = () => {
+import {connect} from "react-redux";
 
-    const [quizListState, setQuizListState] = new useState({
-        quizes:[],
-        loading:true
-    })
+
+
+const QuizList = (props) => {
 
     useEffect(()=> {
-        const fetchData = async () => {
-            try{
-                const response = await  axios.get('quizes.json')
-                // console.log('response data - ',response.data)
-                const quizesList = []
-                if (response.data === null){
-
-                    setQuizListState({
-                        ...quizListState,
-                        loading:false
-                    })
-                    return false
-
-                }
-
-
-                Object.keys(response.data).forEach((key, index)=>{
-                    quizesList.push({
-                        id:key,
-                        name: `Тест №${index + 1}`
-                    })
-                })
-                setQuizListState({
-                    ...quizListState,
-                    quizes:quizesList,
-                    loading:false
-                })
-            } catch (e) {
-                console.log('error ',e)
-            }
-        }
-
-        fetchData()
-            .catch(console.error)
-
+        props.fetchQuizes()
     },[])
 
     function renderQuizes (){
-        if (quizListState.quizes.length === 0)
+
+        if (props.quizes.length === 0)
             return (
                 <>
                 <p><Link to={'/quiz-creator'} >
@@ -63,8 +29,7 @@ const QuizList = () => {
 
             )
 
-
-        return quizListState.quizes.map((quiz)=>{
+        return props.quizes.map((quiz)=>{
             return(
                 <li
                     key={quiz.id}
@@ -84,7 +49,7 @@ const QuizList = () => {
         <div className={classes.QuilList}>
             <div>
                 <h1>Список тестов</h1>
-                {quizListState.loading
+                {props.loading
                     ? <Loader/>
                     :<ul>
                         { renderQuizes() }
@@ -96,4 +61,25 @@ const QuizList = () => {
     );
 };
 
-export default QuizList;
+
+//connect()(App) // принимает в себя 2 параметра // соединяет компонент со стором Redux
+
+function mapStateToProps(state){    //переводит стейт в пропсы компонента
+    // console.log('State', state)
+    return{
+        quizes: state.quiz.quizes,
+        loading: state.quiz.loading,
+        error: state.quiz.error
+    }
+
+}
+
+function mapDispatchToProps(dispatch){
+    return{
+        fetchQuizes: ()=> dispatch(fetchQuizes())
+    }
+}
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(QuizList);

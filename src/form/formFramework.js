@@ -16,7 +16,6 @@ export function validate(value, validation = null){
     if (validation.required) {
         isValid = value.trim() !== '' && isValid
     }
-
     return isValid
 
 }

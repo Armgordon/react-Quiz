@@ -5,16 +5,38 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
 
+//Redux add
+import {Provider} from 'react-redux'
+import {createStore, applyMiddleware, compose} from 'redux'
+import rootReducer from "./store/reducers/rootReducer";
+import reduxThunk from 'redux-thunk'
+
+const composeEnhancers =
+    (typeof window !== 'undefined' &&
+        window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
+    compose;
+
+const store = createStore(rootReducer,
+    composeEnhancers(
+        applyMiddleware(
+            reduxThunk
+        )
+    ))
+
 const container = document.getElementById('root')
 const root = ReactDOM.createRoot(container)
+const app = (
 
-root.render(
-
-    <React.StrictMode>
+    <Provider store={store}>
         <BrowserRouter>
             <App />
         </BrowserRouter>
-    </React.StrictMode>
+    </Provider>
+    )
+
+root.render(
+    app
+
 )
 
 
