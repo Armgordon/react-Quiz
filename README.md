@@ -2,7 +2,7 @@
 
 Pet project of Armgordon <Armgordon@gmail.com>.\
 Deployed on [ppax.ru](http://ppax.ru).\
-Authetification and Realtime Database from [Firebase](https://firebase.google.com/).
+Authetification and realtime database from Google [Firebase](https://firebase.google.com/).
 \
 \
 \
