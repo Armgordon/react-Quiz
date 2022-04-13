@@ -4,7 +4,8 @@ import classes from './Button.module.scss'
 const Button = (props) => {
     const cls = [
         classes.Button,
-        classes[props.type]
+        classes[props.type],
+        classes[props.mod]
     ]
 
     return (

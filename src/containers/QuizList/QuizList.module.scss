@@ -1,13 +1,41 @@
+@import "../../styles/colorPalette.module";
+
 .QuilList{
   display: flex;
   justify-content: center;
-  padding-top: 100px ;
+  padding: 100px 0;
+
   flex-grow: 1;
   width: 100%;
-  background: linear-gradient(90deg, #fd8355 0%, #f0576c 37%, #f79cbd 100%);
+  background: linear-gradient(45deg, $brand_color_3 15%,$brand_color_8 15%, $brand_color_5 16%);
+
+  &__layer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 20px;
+    padding: 20px;
+
+    width: 100%;
+    max-width: 600px;
+    height: fit-content;
+
+    background-color: $brand_color_8;
+
+    border-radius: 15px;
+    box-shadow: 2px 2px 2px rgba(0,0,0,0.2);
+
+    transition: all 0.3s ease;
+
+    &:hover{
+      //box-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+
+  }
 
   h1{
-    color: #ffffff;
+    color: $brand_color_1;
+    //color: $brand_color_3;
   }
 
   ul{
@@ -22,10 +50,10 @@
 
     a{
       text-decoration: none;
-      color: #ffffff;
+      color: $brand_color_3;
 
       &:hover{
-        color: #363f54;
+        color: $brand_color_5;
       }
     }
   }

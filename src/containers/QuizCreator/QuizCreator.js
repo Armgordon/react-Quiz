@@ -158,7 +158,7 @@ const QuizCreator = (props) => {
 
     return (
         <div className={classes.QuizCreator}>
-            <div>
+            <div className={classes.QuizCreator__form}>
                 <h1>Создание теста</h1>
                 <form onSubmit={submitHandler}>
                     {renderControls()}
@@ -173,6 +173,7 @@ const QuizCreator = (props) => {
 
                     <Button
                         type={'success'}
+                        mod={'right'}
                         onClick={createQuizHandler}
                         disabled={props.quiz.length === 0}
                     >Создать тест

@@ -1,7 +1,8 @@
 import React from 'react';
 import classes from './FinishedQuiz.module.scss'
 import Button from "../UI/Button/Button";
-import {Link} from "react-router-dom"
+import {useNavigate} from "react-router-dom"
+
 
 const FinishedQuiz = (props) => {
 
@@ -11,6 +12,14 @@ const FinishedQuiz = (props) => {
         }
         return total
     },0)
+
+    //редирект по клику кнопки
+
+    let navigate = useNavigate();
+    function changeRoute(){
+        navigate('/');
+    }
+
 
     return (
         <div className={classes.FinishedQuiz}>
@@ -39,9 +48,12 @@ const FinishedQuiz = (props) => {
 
             <div>
                 <Button onClick={props.onRetry} type='primary'>Повторить</Button>
-                <Link to='/'>
-                    <Button type='success' >Перейти в список тестов</Button>
-                </Link>
+                {/*<Link to='/'>*/}
+                    <Button
+                        type='success'
+                        onClick={changeRoute}
+                    >Перейти в список тестов</Button>
+                {/*</Link>*/}
             </div>
         </div>
     )

@@ -156,10 +156,10 @@ const Auth = (props) => {
 
     return (
         <div className={classes.Auth}>
-            <div>
+            <div className={classes.Auth__form}>
                 <h1>Авторизация</h1>
 
-                <form onSubmit={submitHandler} className={classes.AuthForm}>
+                <form onSubmit={submitHandler}>
                     {props.isError &&
                         <Notification
                         text={props.errorText}
@@ -173,8 +173,10 @@ const Auth = (props) => {
                         onClick={loginHandler}
                         disabled={!formValid.isFormValid}
                     >Войти</Button>
+
                     <Button
                         type={"primary"}
+                        mod={'right'}
                         onClick={registerHandler}
                         disabled={!formValid.isFormValid}
                     >Зарегистрироваться</Button>

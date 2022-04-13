@@ -1,27 +1,39 @@
+@import "../../styles/colorPalette.module";
+
 .Auth{
   display: flex;
   justify-content: center;
   padding-top: 100px;
   flex-grow: 1;
   width: 100%;
-  background: linear-gradient(270deg, #cef2fa 0%, #59bfef 100%);
+  background: linear-gradient(0deg, $brand_color_3 15%,$brand_color_8 15%, $brand_color_5 16%);
 
-  &>div{
+  &__form{
+
+
+    margin: 0 20px;
+    padding: 15px;
+
     width: 100%;
     max-width: 600px;
-    padding: 0 20px;
+    height: fit-content;
+
+    background-color: $brand_color_8;
+
+    border-radius: 15px;
+    box-shadow: 2px 2px 2px rgba(0,0,0,.2);
+
+    transition: all 0.3s ease;
+
+    &:hover{
+      //box-shadow: 2px 2px 4px rgba(0,0,0,.5);
+    }
+
   }
 
   h1{
-    color: #ffffff;
+    color: $brand_color_1;
     text-align: center;
   }
 }
 
-.AuthForm{
-  background-color: #eee;
-  box-shadow: 2px 2px 2px rgba(0,0,0,.5);
-  padding: 15px;
-  border-radius: 5px;
-
-}

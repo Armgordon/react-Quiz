@@ -1,13 +1,20 @@
+@import "../../../styles/colorPalette.module";
+
 .Button{
   display: inline-block;
   padding: 10px 20px;
   border-radius: 4px;
   border: 1px solid #cccccc;
-  color: #000000;
+  color: $brand_color_1;
   margin-right: 15px;
   text-transform: uppercase;
   font-weight: bold;
   font-size: 12px;
+
+  &:nth-last-child(1){
+    margin-right: 0;
+
+  }
 
   &:focus{
     outline: none
@@ -23,7 +30,7 @@
 }
 
 .success{
-  background-color: rgba(161,240,69,1);
+  background-color: $brand_color_9;
 }
 
 .error{
@@ -31,7 +38,12 @@
 }
 
 .primary{
-  background-color: #2884f6;
+  background-color: $brand_color_4;
   color: #ffffff;
+
+}
+
+.right{
+  float: right;
 
 }

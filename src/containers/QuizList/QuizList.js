@@ -47,15 +47,14 @@ const QuizList = (props) => {
 
     return (
         <div className={classes.QuilList}>
-            <div>
-                <h1>Список тестов</h1>
-                {props.loading
-                    ? <Loader/>
-                    :<ul>
-                        { renderQuizes() }
-                    </ul>
-                }
-
+            <div className={classes.QuilList__layer}>
+            <h1>Список тестов</h1>
+                    {props.loading
+                        ? <Loader/>
+                        :<ul>
+                            { renderQuizes() }
+                        </ul>
+                    }
             </div>
         </div>
     );

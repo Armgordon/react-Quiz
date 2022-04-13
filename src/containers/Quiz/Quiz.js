@@ -21,7 +21,7 @@ const Quiz = (props) => {
 
     return (
         <div className={classes.Quiz}>
-            <div className={classes.QuizWrapper}>
+            <div className={classes.Quiz__wrapper}>
                 <h1>Ответьте на все вопросы</h1>
                 {props.loading || !props.quiz
                     ? <Loader/>

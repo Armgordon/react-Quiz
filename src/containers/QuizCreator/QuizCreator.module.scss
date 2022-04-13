@@ -1,24 +1,30 @@
+@import "../../styles/colorPalette.module";
+
 .QuizCreator{
   display: flex;
   justify-content: center;
-  padding-top: 50px;
+  padding: 100px 0;
   flex-grow: 1;
   width: 100%;
-  background: linear-gradient(270deg, #f0613c 0%, #f0783c 100%);
+  background: linear-gradient(180deg, $brand_color_3 15%,$brand_color_8 15%, $brand_color_5 16%);
 
-  &>div{
+  &__form{
+    margin: 0 20px;
+    padding: 20px;
+
     width: 100%;
     max-width: 600px;
-    padding: 0 20px;
-  }
-  h1{
-    text-align: center;
+    height: fit-content;
+
+    background-color: $brand_color_8;
+
+    border-radius: 15px;
+    box-shadow: 2px 2px 2px rgba(0,0,0,.2);
   }
 
-  form{
-    background: #eee;
-    border-radius: 5px;
-    padding: 15px;
-    box-shadow: 2px 2px 2px rgba(0,0,0,.5);
+  h1{
+    text-align: center;
+    color: $brand_color_1;
   }
-}
+
+ }
